@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+
+require File.join(File.dirname(__FILE__), *%w[.. lib gemifest])
+
+Gemifest::Runner.new(File.join(Dir.pwd, '.gems')).send(ARGV.last)
