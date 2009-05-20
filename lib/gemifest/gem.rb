@@ -1,14 +1,7 @@
 module Gemifest
   def self.all(reload=false)
     @all = nil if reload
-    @all ||= begin
-      begin
-        list = `gem list`
-      ensure
-        # $stdout = STDOUT
-      end
-      list.split(/\n/)
-    end
+    @all ||= `gem list`.split(/\n/)
   end
 
   class Gem
