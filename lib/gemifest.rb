@@ -1,23 +1,33 @@
 require 'rubygems'
-require 'nakajima'
+require 'colored'
 require 'optparse'
 
 $LOAD_PATH << File.dirname(__FILE__)
 
 require 'gemifest/gem'
+require 'gemifest/installer'
 
 module Gemifest
-  def self.run(command)
-    `gem #{command}`
-  end
-
   class Runner
     def initialize(path)
       @path = path
     end
 
     def list
-      gems.each { |gem| puts gem }
+      Gemifest.all(true)
+      puts "Listing gems:"
+      puts
+      missing = []
+      gems.each do |gem|
+        print '['
+        print gem.installed? ? 'ok'.green : '  '.red
+        print '] '
+        puts gem
+        missing << gem.line unless gem.installed?
+      end
+      puts
+      puts "Missing gems:".bold
+      puts missing
     end
 
     def install
