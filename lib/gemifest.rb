@@ -14,6 +14,13 @@ module Gemifest
       @path = path
     end
 
+    def help
+      puts "Gemifest Commands:"
+      puts "- help (show this message)"
+      puts "- list (show gems in gemifest)"
+      puts "- install (install gems in gemifest)"
+    end
+
     def list
       Gemifest.all(true)
       puts "Listing gems:"
@@ -37,6 +44,12 @@ module Gemifest
 
     def install
       gems.each { |gem| gem.install! }
+    end
+
+    def method_missing(sym)
+      puts "Invalid command: #{sym}"
+      puts
+      help
     end
 
     def gems
