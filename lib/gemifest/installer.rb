@@ -3,7 +3,7 @@ module Gemifest
     def initialize(gem)
       @gem = gem
     end
-    
+
     def perform!
       begin
         $stdout = StringIO.new('')
@@ -16,9 +16,9 @@ module Gemifest
         $stdout = STDOUT
       end
     end
-    
+
     private
-    
+
     def with_progress(label)
       STDERR.print label
       begin

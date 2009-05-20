@@ -10,7 +10,14 @@ Gem::Specification.new do |s|
   s.default_executable = %q{gemifest}
   s.email = %q{patnakajima@gmail.com}
   s.executables = ["gemifest"]
-  s.files = ["bin/gemifest", "lib/gemifest", "lib/gemifest/gem.rb", "lib/gemifest/installer.rb", "lib/gemifest.rb"]
+  s.files = [
+    "bin/gemifest",
+    "lib/gemifest",
+    "lib/gemifest/gem.rb",
+    "lib/gemifest/version.rb",
+    "lib/gemifest/installer.rb",
+    "lib/gemifest.rb"
+  ]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.3.1}
   s.summary = %q{Install your gems from a .gems file}

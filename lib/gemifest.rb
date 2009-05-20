@@ -4,8 +4,9 @@ require 'optparse'
 
 $LOAD_PATH << File.dirname(__FILE__)
 
-require 'gemifest/gem'
 require 'gemifest/installer'
+require 'gemifest/version'
+require 'gemifest/gem'
 
 module Gemifest
   class Runner
