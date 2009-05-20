@@ -26,8 +26,12 @@ module Gemifest
         missing << gem.line unless gem.installed?
       end
       puts
-      puts "Missing gems:".bold
-      puts missing
+      if missing.empty?
+        puts "All gems installed!".bold
+      else
+        puts "Missing gems:".bold
+        puts missing
+      end
     end
 
     def install

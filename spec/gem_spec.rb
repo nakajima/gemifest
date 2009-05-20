@@ -28,11 +28,6 @@ describe Gemifest::Gem do
       version = Gemifest::Gem::Version.new('fixjour (1.2.3)')
       version.to_s.should == '1.2.3'
     end
-    
-    it "finds value" do
-      version = Gemifest::Gem::Version.new('fixjour (1.2.3)')
-      version.value.should == 3*10 + 2*20 + 1*30
-    end
   end
   
   describe "installed?" do

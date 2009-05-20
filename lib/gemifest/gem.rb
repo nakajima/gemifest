@@ -26,38 +26,39 @@ module Gemifest
       end
 
       def >(other)
-        digits.each_with_index do |num, i|
-          return true if num > other.digits[i]
-        end ; false
+        compare_with(other, returns=true) do |this, that|
+          this > that
+        end
       end
 
       def <(other)
-        digits.each_with_index do |num, i|
-          return true if num < other.digits[i]
-        end ; false
+        compare_with(other, returns=true) do |this, that|
+          this < that
+        end
       end
 
       def >=(other)
-        digits.each_with_index do |num, i|
-          return false if num < other.digits[i]
-        end or true
+        compare_with(other, returns=false) do |this, that|
+          this < that
+        end
       end
 
       def <=(other)
-        digits.each_with_index do |num, i|
-          return false if num > other.digits[i]
-        end or true
+        compare_with(other, returns=false) do |this, that|
+          this > that
+        end
       end
 
       def to_s
         @line.scan(/\(?([\d\.]+)[\),]?/).first.to_s
       end
 
-      def value
-        total = 0
-        to_s.scan(/\d+/).flatten.reverse.each_with_index do |num, i|
-          total += num.to_i * ((i + 1) * 10)
-        end ; total
+      private
+
+      def compare_with(other, result)
+        digits.each_with_index do |num, i|
+          return result if yield(num, other.digits[i])
+        end ; not result
       end
     end
 
@@ -104,13 +105,6 @@ module Gemifest
     alias_method :to_s, :name
 
     private
-
-    def version_value(version)
-      total = 0
-      version.to_s.scan(/\d+/).flatten.reverse.each_with_index do |num, i|
-        total += num.to_i * (i * 10)
-      end ; total
-    end
 
     def get(name)
       if val = @opts[name]
