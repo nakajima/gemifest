@@ -9,6 +9,11 @@ require 'gemifest/version'
 require 'gemifest/gem'
 
 module Gemifest
+  if RUBY_PLATFORM.downcase =~ /mswin(?!ce)|mingw|cygwin|bccwin/
+    @gem_command = 'gem.bat'
+  else
+    @gem_command = 'gem'
+  end
   class Runner
     def initialize(path)
       @path = path

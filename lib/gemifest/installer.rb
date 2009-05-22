@@ -9,7 +9,7 @@ module Gemifest
         $stdout = StringIO.new('')
         $stderr = StringIO.new('')
         with_progress 'Installing ' + @gem.name do
-          `gem install --no-ri --no-rdoc #{@gem.line}`
+          `#{@gem_command} install --no-ri --no-rdoc #{@gem.line}`
         end
       ensure
         $stderr = STDERR

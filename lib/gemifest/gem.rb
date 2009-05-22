@@ -1,7 +1,7 @@
 module Gemifest
   def self.all(reload=false)
     @all = nil if reload
-    @all ||= `gem list`.split(/\n/)
+    @all ||= `#{@gem_command} list`.split(/\n/)
   end
 
   class Gem
